@@ -27,13 +27,13 @@ SpellBook & SpellBook::operator=(SpellBook const &src)
 void SpellBook::learnSpell(ASpell* new_spell)
 {
     if (new_spell)
-        this->_spellBook[new_spell->getName()] = new_spell->clone();
+        _spellBook[new_spell->getName()] = new_spell->clone();
 }
 
 void SpellBook::forgetSpell(std::string const &spell_name)
 {
-    std::map<std::string, ASpell*>::iterator it = this->_spellBook.find(spell_name);
-    if (it != this->_spellBook.end())
+    std::map<std::string, ASpell*>::iterator it = _spellBook.find(spell_name);
+    if (it != _spellBook.end())
     {
         delete it->second;
         _spellBook.erase(it);
@@ -46,7 +46,7 @@ ASpell* SpellBook::createSpell(std::string const &new_spell)
     std::map<std::string, ASpell*>::iterator it = _spellBook.find(new_spell);
     if (it != _spellBook.end())
     {
-        tmp = _spellBook[new_spell];
+        tmp = it->second->clone();
     }
     return (tmp);
 }
